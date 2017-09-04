@@ -5547,7 +5547,7 @@
   ContentTools = {
     Tools: {},
     CANCEL_MESSAGE: 'Your changes have not been saved, do you really want to lose them?'.trim(),
-    DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right'], ['heading', 'subheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
+    DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right'], ['heading', 'subheading', 'subsubheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
     DEFAULT_VIDEO_HEIGHT: 300,
     DEFAULT_VIDEO_WIDTH: 400,
     HIGHLIGHT_HOLD_DURATION: 2000,
@@ -9545,6 +9545,25 @@
     Subheading.tagName = 'h2';
 
     return Subheading;
+
+  })(ContentTools.Tools.Heading);
+
+  ContentTools.Tools.SubSubHeading = (function(_super) {
+    __extends(SubSubHeading, _super);
+
+    function SubSubHeading() {
+      return SubSubHeading.__super__.constructor.apply(this, arguments);
+    }
+
+    ContentTools.ToolShelf.stow(SubSubHeading, 'subsubheading');
+
+    SubSubHeading.label = 'SubSubheading';
+
+    SubSubHeading.icon = 'subsubheading';
+
+    SubSubHeading.tagName = 'h3';
+
+    return SubSubHeading;
 
   })(ContentTools.Tools.Heading);
 

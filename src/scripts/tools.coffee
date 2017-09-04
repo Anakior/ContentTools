@@ -506,6 +506,15 @@ class ContentTools.Tools.Subheading extends ContentTools.Tools.Heading
     @icon = 'subheading'
     @tagName = 'h2'
 
+class ContentTools.Tools.SubSubHeading extends ContentTools.Tools.Heading
+
+    # Convert the current text block to a subsubheading (e.g <h2>foo</h2>)
+
+    ContentTools.ToolShelf.stow(@, 'subsubheading')
+
+    @label = 'SubSubheading'
+    @icon = 'subsubheading'
+    @tagName = 'h3'
 
 class ContentTools.Tools.Paragraph extends ContentTools.Tools.Heading
 

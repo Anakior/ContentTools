@@ -23,6 +23,7 @@ ContentTools =
         ], [
             'heading',
             'subheading',
+            'subsubheading',
             'paragraph',
             'unordered-list',
             'ordered-list',
