@@ -9621,6 +9621,60 @@
 
   })(ContentTools.Tools.Heading);
 
+  ContentTools.Tools.Div = (function(_super) {
+    __extends(Div, _super);
+
+    function Div() {
+      return Div.__super__.constructor.apply(this, arguments);
+    }
+
+    ContentTools.ToolShelf.stow(Div, 'div');
+
+    Div.label = 'Div';
+
+    Div.icon = 'div';
+
+    Div.tagName = 'div';
+
+    Div.canApply = function(element, selection) {
+      if (element.isFixed()) {
+        return false;
+      }
+      return element !== void 0;
+    };
+
+    Div.apply = function(element, selection, callback) {
+      var div, forceAdd, region, toolDetail;
+      forceAdd = this.editor().ctrlDown();
+      if (ContentTools.Tools.Heading.canApply(element) && !forceAdd) {
+        return Div.__super__.constructor.apply.call(this, element, selection, callback);
+      } else {
+        toolDetail = {
+          'tool': this,
+          'element': element,
+          'selection': selection
+        };
+        if (!this.dispatchEditorEvent('tool-apply', toolDetail)) {
+          return;
+        }
+        if (element.parent().type() !== 'Region') {
+          element = element.closest(function(node) {
+            return node.parent().type() === 'Region';
+          });
+        }
+        region = element.parent();
+        div = new ContentEdit.Text('div');
+        region.attach(div, region.children.indexOf(element) + 1);
+        div.focus();
+        callback(true);
+        return this.dispatchEditorEvent('tool-applied', toolDetail);
+      }
+    };
+
+    return Div;
+
+  })(ContentTools.Tools.Heading);
+
   ContentTools.Tools.Preformatted = (function(_super) {
     __extends(Preformatted, _super);
 
