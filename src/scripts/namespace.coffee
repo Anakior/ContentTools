@@ -24,6 +24,7 @@ ContentTools =
             'heading',
             'subheading',
             'subsubheading',
+            'div',
             'paragraph',
             'unordered-list',
             'ordered-list',
