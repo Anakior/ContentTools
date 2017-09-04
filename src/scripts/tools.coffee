@@ -571,61 +571,6 @@ class ContentTools.Tools.Paragraph extends ContentTools.Tools.Heading
             # Dispatch `applied` event
             @dispatchEditorEvent('tool-applied', toolDetail)
 
-class ContentTools.Tools.Div extends ContentTools.Tools.Heading
-
-    # Convert the current text block to a div (e.g <p>foo</p>)
-
-    ContentTools.ToolShelf.stow(@, 'div')
-
-    @label = 'Div'
-    @icon = 'div'
-    @tagName = 'div'
-
-    @canApply: (element, selection) ->
-        # Return true if the tool can be applied to the current
-        # element/selection.
-        if element.isFixed()
-            return false
-
-        return element != undefined
-
-    @apply: (element, selection, callback) ->
-        # Apply the tool to the current element
-        forceAdd = @editor().ctrlDown()
-
-        if ContentTools.Tools.Heading.canApply(element) and not forceAdd
-            # If the element is a top level text element and the user hasn't
-            # indicated they want to force add a new div convert it to a
-            # div in-place.
-            return super(element, selection, callback)
-        else
-            # Dispatch `apply` event
-            toolDetail = {
-                'tool': this,
-                'element': element,
-                'selection': selection
-                }
-            if not @dispatchEditorEvent('tool-apply', toolDetail)
-                return
-
-            # If the element isn't a text element find the nearest top level
-            # node and insert a new div element after it.
-            if element.parent().type() != 'Region'
-                element = element.closest (node) ->
-                    return node.parent().type() is 'Region'
-
-            region = element.parent()
-            div = new ContentEdit.Text('div')
-            region.attach(div, region.children.indexOf(element) + 1)
-
-            # Give the newely inserted div focus
-            div.focus()
-
-            callback(true)
-
-            # Dispatch `applied` event
-            @dispatchEditorEvent('tool-applied', toolDetail)
-
 class ContentTools.Tools.Preformatted extends ContentTools.Tools.Heading
 
     # Convert the current text block to a preformatted block (e.g <pre>foo</pre)

@@ -5547,7 +5547,7 @@
   ContentTools = {
     Tools: {},
     CANCEL_MESSAGE: 'Your changes have not been saved, do you really want to lose them?'.trim(),
-    DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right'], ['heading', 'subheading', 'subsubheading', 'div', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
+    DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right'], ['heading', 'subheading', 'subsubheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
     DEFAULT_VIDEO_HEIGHT: 300,
     DEFAULT_VIDEO_WIDTH: 400,
     HIGHLIGHT_HOLD_DURATION: 2000,
@@ -9618,60 +9618,6 @@
     };
 
     return Paragraph;
-
-  })(ContentTools.Tools.Heading);
-
-  ContentTools.Tools.Div = (function(_super) {
-    __extends(Div, _super);
-
-    function Div() {
-      return Div.__super__.constructor.apply(this, arguments);
-    }
-
-    ContentTools.ToolShelf.stow(Div, 'div');
-
-    Div.label = 'Div';
-
-    Div.icon = 'div';
-
-    Div.tagName = 'div';
-
-    Div.canApply = function(element, selection) {
-      if (element.isFixed()) {
-        return false;
-      }
-      return element !== void 0;
-    };
-
-    Div.apply = function(element, selection, callback) {
-      var div, forceAdd, region, toolDetail;
-      forceAdd = this.editor().ctrlDown();
-      if (ContentTools.Tools.Heading.canApply(element) && !forceAdd) {
-        return Div.__super__.constructor.apply.call(this, element, selection, callback);
-      } else {
-        toolDetail = {
-          'tool': this,
-          'element': element,
-          'selection': selection
-        };
-        if (!this.dispatchEditorEvent('tool-apply', toolDetail)) {
-          return;
-        }
-        if (element.parent().type() !== 'Region') {
-          element = element.closest(function(node) {
-            return node.parent().type() === 'Region';
-          });
-        }
-        region = element.parent();
-        div = new ContentEdit.Text('div');
-        region.attach(div, region.children.indexOf(element) + 1);
-        div.focus();
-        callback(true);
-        return this.dispatchEditorEvent('tool-applied', toolDetail);
-      }
-    };
-
-    return Div;
 
   })(ContentTools.Tools.Heading);
 

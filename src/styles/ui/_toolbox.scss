@@ -166,7 +166,6 @@
         &--heading:before        { content: "H"    ; font-weight: bold; }
         &--subheading:before     { content: "H"    ; }
         &--subsubheading:before  { content: "h"; font-family: arial; line-height: 35px; }
-        &--div:before            { content: "div"; font-family: arial; }
         &--paragraph:before      { content: "P"    ; }
         &--preformatted:before   { content: "\ea80"; }
         &--italic:before         { content: "\ea64"; }
