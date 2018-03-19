@@ -43,8 +43,8 @@ ContentTools =
     ]
 
     # Default sizes for new videos when inserted into a region
-    DEFAULT_VIDEO_HEIGHT: 300
-    DEFAULT_VIDEO_WIDTH: 400
+    DEFAULT_VIDEO_HEIGHT: 315
+    DEFAULT_VIDEO_WIDTH: 560
 
     # If the user holds down the shift key for an extended period of time the
     # editor app will highlight the editable regions on the page (if there are

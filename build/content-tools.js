@@ -5548,8 +5548,8 @@
     Tools: {},
     CANCEL_MESSAGE: 'Your changes have not been saved, do you really want to lose them?'.trim(),
     DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right'], ['heading', 'subheading', 'subsubheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
-    DEFAULT_VIDEO_HEIGHT: 300,
-    DEFAULT_VIDEO_WIDTH: 400,
+    DEFAULT_VIDEO_HEIGHT: 315,
+    DEFAULT_VIDEO_WIDTH: 560,
     HIGHLIGHT_HOLD_DURATION: 2000,
     IMAGE_UPLOADER: null,
     INLINE_TAGS: ['a', 'address', 'b', 'code', 'del', 'em', 'i', 'ins', 'span', 'strong', 'sup', 'u'],
@@ -8813,14 +8813,19 @@
           child = _ref1[_i];
           child.unmount();
         }
-        if (region.children.length === 1 && region.children[0].isFixed()) {
-          wrapper = this.constructor.createDiv();
-          wrapper.innerHTML = snapshot.regions[name];
-          domRegions.push(wrapper.firstElementChild);
-          region.domElement().parentNode.replaceChild(wrapper.firstElementChild, region.domElement());
+        if (snapshot.regions[name] !== void 0) {
+          if (region.children.length === 1 && region.children[0].isFixed()) {
+            wrapper = this.constructor.createDiv();
+            wrapper.innerHTML = snapshot.regions[name];
+            domRegions.push(wrapper.firstElementChild);
+            region.domElement().parentNode.replaceChild(wrapper.firstElementChild, region.domElement());
+          } else {
+            domRegions.push(region.domElement());
+            region.domElement().innerHTML = snapshot.regions[name];
+          }
         } else {
-          domRegions.push(region.domElement());
-          region.domElement().innerHTML = snapshot.regions[name];
+          region.domElement().remove();
+          delete this._regions[name];
         }
       }
       this._domRegions = domRegions;
