@@ -6589,24 +6589,30 @@
           redo = false;
           undo = false;
           switch (os) {
-            case 'linux' && !ev.altKey:
-              if (ev.keyCode === 90 && ev.ctrlKey) {
-                redo = ev.shiftKey;
-                undo = !redo;
+            case 'linux':
+              if (!ev.altKey) {
+                if (ev.keyCode === 90 && ev.ctrlKey) {
+                  redo = ev.shiftKey;
+                  undo = !redo;
+                }
               }
               break;
-            case 'mac' && !(ev.altKey || ev.ctrlKey):
-              if (ev.keyCode === 90 && ev.metaKey) {
-                redo = ev.shiftKey;
-                undo = !redo;
+            case 'mac':
+              if (!(ev.altKey || ev.ctrlKey)) {
+                if (ev.keyCode === 90 && ev.metaKey) {
+                  redo = ev.shiftKey;
+                  undo = !redo;
+                }
               }
               break;
-            case 'windows' && !ev.altKey || ev.shiftKey:
-              if (ev.keyCode === 89 && ev.ctrlKey) {
-                redo = true;
-              }
-              if (ev.keyCode === 90 && ev.ctrlKey) {
-                undo = true;
+            case 'windows':
+              if (!ev.altKey || ev.shiftKey) {
+                if (ev.keyCode === 89 && ev.ctrlKey) {
+                  redo = true;
+                }
+                if (ev.keyCode === 90 && ev.ctrlKey) {
+                  undo = true;
+                }
               }
           }
           if (undo && ContentTools.Tools.Undo.canApply(null, null)) {
@@ -8661,7 +8667,7 @@
         if (!node) {
           continue;
         }
-        if (node.nodeName = '#text' && node.textContent.trim() === '') {
+        if (node.nodeName === '#text' && node.textContent.trim() === '') {
           continue;
         }
         elementCls = tagNames.match(node.nodeName);
